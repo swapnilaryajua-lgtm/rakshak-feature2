@@ -1,0 +1,9 @@
+{
+  "name": "rakshak-feature2",
+  "version": "1.0.0",
+  "description": "Rakshak-Feature 2: Multi-Agent Cybersecurity SOC Replay & Defense Dashboard",
+  "private": true,
+  "scripts": {
+    "start": "python demo_app.py --precomputed"
+  }
+}

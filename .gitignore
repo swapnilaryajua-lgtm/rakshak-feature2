@@ -21,3 +21,6 @@ outputs/replay_trace.jsonl
 *.log
 .DS_Store
 Thumbs.db
+
+.vercel
+.env*

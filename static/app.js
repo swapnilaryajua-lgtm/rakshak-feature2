@@ -117,12 +117,15 @@
 
   async function loadInitialData() {
     try {
-      const resp = await fetch("/api/replay");
+      let resp = await fetch("/api/replay");
+      if (!resp.ok) {
+        resp = await fetch("/replay_demo.json");
+      }
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       replayData = await resp.json();
       initializeReplay(replayData);
     } catch (err) {
-      console.error("[CyberSentinel] Error loading replay data:", err);
+      console.error("[Rakshak-Feature 2] Error loading replay data:", err);
       showToast("Error Loading Replay", "Failed to load replay data. Check server.");
     }
   }

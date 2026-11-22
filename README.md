@@ -1,11 +1,13 @@
 # Rakshak-Feature 2: Multi-Agent Network Intrusion Detection & Adaptive Defense
 
+[![Live Demo](https://img.shields.io/badge/Vercel-Live%20Dashboard%20Online-black?style=for-the-badge&logo=vercel)](https://rakshak-feature2.vercel.app)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Architecture: 5-Agent Pipeline](https://img.shields.io/badge/Architecture-5--Agent%20Deterministic%20Pipeline-purple.svg)]()
 [![Official Validator: 15/15 PASS](https://img.shields.io/badge/Official%20Validator-15%2F15%20PASS-brightgreen.svg)]()
 [![No LLM: 100% Deterministic](https://img.shields.io/badge/Inference-100%25%20Offline%20%7C%20No%20LLM-orange.svg)]()
 
+> **🌐 Live Interactive SOC Dashboard:** [https://rakshak-feature2.vercel.app](https://rakshak-feature2.vercel.app)  
 > **Jaypee Agentic AI International Summit 2026 — Track 1: Agentic AI for Cybersecurity**  
 > **Rakshak-Feature 2** is a modular, high-throughput, agentic cyber-defense system. It couples calibrated supervised threat classification with an independent one-class anomaly detector, cost-aware evidence fusion, causal temporal burst correlation, and autonomous adaptive firewall policy actuation.
 
@@ -174,8 +176,10 @@ Evaluated on the hidden official challenge file `records.csv` (200 records in se
 
 ## 🖥️ Live Demo Web Application
 
-A full-featured presentation-grade dashboard built with pure HTML5, vanilla JavaScript, and hand-crafted SVG data visualizations (no CDNs, zero cloud dependencies).
+A full-featured presentation-grade dashboard built with pure HTML5, vanilla JavaScript, and hand-crafted SVG data visualizations.
 
+- **🌐 Live Vercel Deployment:** [https://rakshak-feature2.vercel.app](https://rakshak-feature2.vercel.app)
+- **💻 Local Replay Server (Offline):**
 ```bash
 # Launch interactive local dashboard
 python demo_app.py

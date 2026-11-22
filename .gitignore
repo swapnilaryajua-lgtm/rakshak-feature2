@@ -1,0 +1,23 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Large dataset partitions & traces (reproducible from raw data)
+Cyber/
+*.parquet
+outputs/results.csv
+outputs/replay_trace.jsonl
+
+# Temporary files
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,56 @@
+{
+  "ablation_table": [
+    {
+      "system": "Agent 1 only (Threat)",
+      "task": "5-Class Classifier",
+      "accuracy": 1.0,
+      "macro_f1": 0.9999,
+      "false_allow_count": 2,
+      "false_block_count": 1
+    },
+    {
+      "system": "Agent 2 (v2) only (Anomaly)",
+      "task": "Binary (Attack vs Benign)",
+      "accuracy": 0.9111,
+      "macro_f1": 0.9104,
+      "auroc": 0.9644,
+      "false_allow_count": 7113,
+      "false_block_count": 3037
+    },
+    {
+      "system": "CyberSentinel Fusion (with v2)",
+      "task": "Multi-Agent Defense",
+      "accuracy": 1.0,
+      "macro_f1": 0.9999,
+      "false_allow_count": 1,
+      "false_block_count": 1
+    }
+  ],
+  "disagreement_analysis": {
+    "agreements_count": 104034,
+    "agreements_pct": 91.11,
+    "disagreements_count": 10151,
+    "disagreements_pct": 8.89,
+    "type1_classifier_attack_anomaly_normal": {
+      "total": 7113,
+      "agent1_right": 7112,
+      "agent2_right": 1
+    },
+    "type2_classifier_benign_anomaly_alert": {
+      "total": 3038,
+      "agent1_right": 3037,
+      "agent2_right": 1
+    }
+  },
+  "action_distribution": {
+    "ALLOW": 59208,
+    "BLOCK": 54183,
+    "ESCALATE": 794
+  },
+  "evidence_status_distribution": {
+    "CONFIRMED": 104034,
+    "CONFLICT_RESOLVED": 9357,
+    "UNKNOWN_THREAT": 793,
+    "LOW_CONFIDENCE": 1
+  }
+}

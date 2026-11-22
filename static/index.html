@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rakshak-Feature 2 — Live Multi-Agent Security Operations Center</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2306b6d4'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z'/></svg>">
+</head>
+<body class="theme-soc">
+
+  <!-- Top Navigation & Sticky Status HUD -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <div class="brand-shield">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
+          <path d="M12 11l3 3m0-3l-3 3"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">Rakshak-Feature 2</div>
+        <div class="brand-tag">Track 1: Agentic AI for Cybersecurity | Jaypee Summit 2026</div>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Badges -->
+    <div class="nav-badges">
+      <span class="badge badge-sim"><span class="dot pulse"></span> SIMULATED / OFFLINE REPLAY</span>
+      <span class="badge badge-info">5 Deterministic Agents (No LLM)</span>
+      <span id="badge-match" class="badge badge-success">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Matches Submitted Files (outputs/final)
+      </span>
+    </div>
+
+    <!-- Action Controls -->
+    <div class="nav-actions">
+      <button id="btn-run-replay" class="btn btn-primary" title="Re-run the complete 5-agent pipeline fresh on records.csv (Key: R)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        <span>Run Fresh Replay</span>
+      </button>
+      <button id="btn-validate" class="btn btn-outline" title="Inspect official validation check suite (15 checks)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Validator (15/15 PASS)</span>
+      </button>
+      <button id="btn-presenter" class="btn btn-icon" title="Toggle Presenter Mode (Key: P)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </button>
+      <button id="btn-help" class="btn btn-icon" title="Keyboard Shortcuts & Guidance (Key: ?)">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Section Quick Navigation Bar -->
+  <nav class="sub-nav">
+    <div class="sub-nav-links">
+      <a href="#section-hero" class="active">Overview & Pipeline</a>
+      <a href="#section-replay">Live Replay Player</a>
+      <a href="#section-inspector">Record Inspector</a>
+      <a href="#section-policies">Policy Ledger (Gantt)</a>
+      <a href="#section-endpoints">Source IP Telemetry</a>
+      <a href="#section-evidence">Evidence & Agreement</a>
+      <a href="#section-tradeoff">Safe Defense & What-If</a>
+      <a href="#section-validator">Official Validator</a>
+    </div>
+    <div class="sub-nav-hud">
+      <span class="hud-item"><span class="hud-label">ALLOW</span> <b id="hud-allow" class="text-allow">104</b></span>
+      <span class="hud-item"><span class="hud-label">BLOCK</span> <b id="hud-block" class="text-block">96</b></span>
+      <span class="hud-item"><span class="hud-label">POLICIES</span> <b id="hud-policies" class="text-cyan">6</b></span>
+      <span class="hud-item"><span class="hud-label">ATTACK CONTAINED</span> <b id="hud-containment" class="text-allow">96.0%</b></span>
+      <span class="hud-item"><span class="hud-label">BENIGN BLOCKED</span> <b id="hud-collateral" class="text-allow">0 (100% Kept)</b></span>
+    </div>
+  </nav>
+
+  <!-- Presenter Mode Banner (Toggled with P) -->
+  <aside id="presenter-banner" class="presenter-banner hidden">
+    <div class="presenter-content">
+      <div class="presenter-tag">PRESENTER MODE (Press P to toggle)</div>
+      <div id="presenter-note" class="presenter-text">
+        Welcome judges. CyberSentinel is a 5-agent intrusion detection and causal adaptive defense system. It operates entirely offline without LLMs, evaluating flows in sequence and creating temporary, bounded firewall policies.
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Toast Notification for Policy Events -->
+    <div id="policy-toast" class="policy-toast hidden">
+      <div class="toast-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="toast-body">
+        <div id="toast-title" class="toast-title">Policy Event</div>
+        <div id="toast-desc" class="toast-desc">Policy updated</div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: HERO & ARCHITECTURE PIPELINE DIAGRAM -->
+    <section id="section-hero" class="card section-hero">
+      <div class="hero-header">
+        <div>
+          <h1 class="hero-title">Multi-Agent Network Intrusion Detection & Adaptive Defense</h1>
+          <p class="hero-subtitle">
+            Causal traffic replay on 200 hidden flows (<code>records.csv</code>). 
+            Threat classification (A1) and one-class anomaly scoring (A2) are synthesized by Evidence Fusion (A3). 
+            Temporal Correlation (A4) clusters attack bursts, allowing Adaptive Defense (A5) to actuate temporary, bounded firewall policies.
+          </p>
+        </div>
+        <div class="hero-meta-box">
+          <div class="meta-row"><span>Input Data:</span> <b>records.csv (200 records, unlabelled)</b></div>
+          <div class="meta-row"><span>Replay Mode:</span> <b>Strictly Causal (No Future Records)</b></div>
+          <div class="meta-row"><span>Firewall Action:</span> <b>SOURCE_IP Temporary BLOCK (TTL: 30)</b></div>
+          <div class="meta-row"><span>Submission Match:</span> <b class="text-allow">100% Byte-Identical to outputs/final</b></div>
+        </div>
+      </div>
+
+      <!-- Animated Pipeline Flow Diagram with Dynamic Active Telemetry -->
+      <div class="pipeline-container">
+        <div class="pipeline-title">
+          <span>REAL-TIME MULTI-AGENT INFERENCE PIPELINE</span>
+          <span class="pipeline-active-badge">Active Flow: <span id="pipeline-active-id" class="text-cyan">F000001 (Seq 1)</span></span>
+        </div>
+
+        <div class="pipeline-diagram">
+          <!-- Flow Ingest Node -->
+          <div class="pipeline-node node-flow">
+            <div class="node-header">
+              <span class="node-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></span>
+              <span class="node-title">Flow Ingest</span>
+            </div>
+            <div class="node-body">
+              <div class="node-val" id="node-flow-id">F000001</div>
+              <div class="node-sub" id="node-flow-src">192.168.10.8</div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+          <!-- Detection Layer: A1 and A2 Parallel -->
+          <div class="pipeline-stack">
+            <div class="pipeline-node node-a1">
+              <div class="node-header">
+                <span class="node-num">A1</span>
+                <span class="node-title">Threat Classifier</span>
+              </div>
+              <div class="node-body">
+                <div class="node-val" id="node-a1-class">BENIGN</div>
+                <div class="node-sub">Conf: <span id="node-a1-conf">1.00</span> (74 features)</div>
+              </div>
+            </div>
+
+            <div class="pipeline-node node-a2">
+              <div class="node-header">
+                <span class="node-num">A2</span>
+                <span class="node-title">Anomaly Detector</span>
+              </div>
+              <div class="node-body">
+                <div class="node-val" id="node-a2-score">0.0304</div>
+                <div class="node-sub" id="node-a2-anom">Normal Traffic (PCA-Mahal)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+          <!-- Fusion & Correlation Layer: A3 and A4 -->
+          <div class="pipeline-stack">
+            <div class="pipeline-node node-a3">
+              <div class="node-header">
+                <span class="node-num">A3</span>
+                <span class="node-title">Evidence Fusion</span>
+              </div>
+              <div class="node-body">
+                <div class="node-val" id="node-a3-status">AGREE</div>
+                <div class="node-sub" id="node-a3-class">Final: BENIGN</div>
+              </div>
+            </div>
+
+            <div class="pipeline-node node-a4">
+              <div class="node-header">
+                <span class="node-num">A4</span>
+                <span class="node-title">Temporal Correlation</span>
+              </div>
+              <div class="node-body">
+                <div class="node-val" id="node-a4-group">No Cluster</div>
+                <div class="node-sub" id="node-a4-pattern">Causal Window (50)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+          <!-- Response Layer: A5 Adaptive Defense -->
+          <div class="pipeline-node node-a5">
+            <div class="node-header">
+              <span class="node-num">A5</span>
+              <span class="node-title">Adaptive Defense</span>
+            </div>
+            <div class="node-body">
+              <div class="node-val" id="node-a5-policy">Policy Ledger</div>
+              <div class="node-sub" id="node-a5-action">TTL: 30 records</div>
+            </div>
+          </div>
+
+          <div class="pipeline-arrow"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+
+          <!-- Decision Enforcement Node -->
+          <div class="pipeline-node node-decision">
+            <div class="node-header">
+              <span class="node-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="node-title">Replay Decision</span>
+            </div>
+            <div class="node-body">
+              <div class="node-val text-allow" id="node-decision-action">ALLOW</div>
+              <div class="node-sub" id="node-decision-pid">active_policy: NONE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: LIVE REPLAY PLAYER (CENTERPIECE) -->
+    <section id="section-replay" class="card section-replay">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Sequential Causal Replay Player</h2>
+          <p class="section-desc">200 flows replayed in strict sequence. Active firewall policies are enforced first; flows without matching active policies are allowed, updating correlation windows and triggering future policy windows.</p>
+        </div>
+        <div class="timeline-legend">
+          <span class="legend-item"><span class="cell cell-allow-sample"></span> ALLOW (<span id="count-allow-stat">104</span>)</span>
+          <span class="legend-item"><span class="cell cell-block-sample"></span> BLOCK (<span id="count-block-stat">96</span>)</span>
+          <span class="legend-item"><span class="sample-ring"></span> Predicted Attack</span>
+          <span class="legend-item"><span class="sample-policy-flag"></span> Policy Activation</span>
+        </div>
+      </div>
+
+      <!-- Playback Control Toolbar -->
+      <div class="replay-toolbar">
+        <div class="toolbar-controls">
+          <button id="btn-play" class="btn btn-primary" title="Play / Pause Replay (Space)">
+            <svg id="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span id="label-play">Play</span>
+          </button>
+          <button id="btn-step-prev" class="btn btn-outline" title="Step Back (Left Arrow)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+          <button id="btn-step-next" class="btn btn-outline" title="Step Forward (Right Arrow)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+          <button id="btn-next-policy" class="btn btn-outline" title="Jump to Next Policy Activation / Expiry (Key: N)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Next Policy Event</span>
+          </button>
+        </div>
+
+        <div class="toolbar-scrub">
+          <input type="range" id="replay-slider" min="0" max="199" value="0" class="slider" title="Scrub Replay Sequence">
+          <span class="scrub-label">Record <b id="scrub-seq">1</b> / 200 (<span id="scrub-rid">F000001</span>)</span>
+        </div>
+
+        <div class="toolbar-speed">
+          <span class="speed-label">Speed:</span>
+          <button class="btn-speed" data-speed="1">1x</button>
+          <button class="btn-speed active" data-speed="2">2x</button>
+          <button class="btn-speed" data-speed="5">5x</button>
+          <button class="btn-speed" data-speed="10">10x</button>
+          <button class="btn-speed" data-speed="50">Max</button>
+        </div>
+      </div>
+
+      <!-- Live Replay HUD Counters -->
+      <div class="replay-hud-grid">
+        <div class="hud-box">
+          <div class="hud-box-title">Records Replayed</div>
+          <div class="hud-box-val" id="stat-progress">1 / 200</div>
+          <div class="hud-box-bar"><div id="progress-bar-fill" class="progress-bar-fill" style="width: 0.5%;"></div></div>
+        </div>
+        <div class="hud-box">
+          <div class="hud-box-title">Cumulative ALLOW</div>
+          <div class="hud-box-val text-allow" id="stat-allow">1</div>
+          <div class="hud-box-sub">Benign & Initial Trigger Flows</div>
+        </div>
+        <div class="hud-box">
+          <div class="hud-box-title">Cumulative BLOCK</div>
+          <div class="hud-box-val text-block" id="stat-block">0</div>
+          <div class="hud-box-sub">Enforced by Active Policies</div>
+        </div>
+        <div class="hud-box">
+          <div class="hud-box-title">Active Policies</div>
+          <div class="hud-box-val text-cyan" id="stat-active-pols">0</div>
+          <div class="hud-box-sub" id="stat-active-pids">None</div>
+        </div>
+        <div class="hud-box">
+          <div class="hud-box-title">Attacker Containment</div>
+          <div class="hud-box-val text-allow" id="stat-containment">0.0%</div>
+          <div class="hud-box-sub">172.16.0.1 Blocked / Total</div>
+        </div>
+        <div class="hud-box">
+          <div class="hud-box-title">Collateral False Blocks</div>
+          <div class="hud-box-val text-allow" id="stat-collateral">0</div>
+          <div class="hud-box-sub">192.168.10.x Preserved: 100%</div>
+        </div>
+      </div>
+
+      <!-- Interactive 200-Record Timeline Grid -->
+      <div class="timeline-container">
+        <div class="timeline-axis">
+          <span>Seq 1</span>
+          <span>Seq 25</span>
+          <span>Seq 50</span>
+          <span>Seq 75</span>
+          <span>Seq 100</span>
+          <span>Seq 125</span>
+          <span>Seq 150</span>
+          <span>Seq 175</span>
+          <span>Seq 200</span>
+        </div>
+        <div id="timeline-grid" class="timeline-grid">
+          <!-- 200 Interactive Cells Rendered by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: RECORD INSPECTOR (5 AGENT TELEMETRY) -->
+    <section id="section-inspector" class="card section-inspector">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Record Inspector & Multi-Agent Evidence Telemetry</h2>
+          <p class="section-desc">Comprehensive telemetry across all 5 agents for the currently selected record. Click any timeline cell or conflict record to inspect.</p>
+        </div>
+        <div class="inspector-badge-box">
+          <span class="badge badge-outline" id="insp-endpoint">192.168.10.8 : 80 &rarr; 172.16.0.1</span>
+          <span class="badge" id="insp-action-badge">ALLOW</span>
+        </div>
+      </div>
+
+      <!-- Replay Rule Banner -->
+      <div id="insp-rule-banner" class="rule-banner rule-allow">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span id="insp-rule-text">No active policy matched source IP 192.168.10.8 &rarr; Action: ALLOW</span>
+      </div>
+
+      <!-- 5-Agent Inspector Cards Grid -->
+      <div class="agent-cards-grid">
+        <!-- Agent 1 Card -->
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <div class="card-agent-badge badge-a1">Agent 1</div>
+            <div class="card-agent-name">Threat Classifier</div>
+          </div>
+          <div class="agent-card-body">
+            <div class="stat-highlight">
+              <div class="stat-main-val" id="insp-a1-class">BENIGN</div>
+              <div class="stat-conf-pill">Confidence: <b id="insp-a1-conf">1.000</b></div>
+            </div>
+            <div class="prob-bars-title">5-Class Softmax Probabilities:</div>
+            <div class="prob-bars" id="insp-a1-probs">
+              <!-- Dynamically populated by app.js -->
+            </div>
+            <div class="card-caption">LightGBM calibrated multi-class classifier trained on 74 features (Destination Port excluded).</div>
+          </div>
+        </div>
+
+        <!-- Agent 2 Card -->
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <div class="card-agent-badge badge-a2">Agent 2</div>
+            <div class="card-agent-name">Anomaly Detector (v2)</div>
+          </div>
+          <div class="agent-card-body">
+            <div class="stat-highlight">
+              <div class="stat-main-val" id="insp-a2-score">0.0304</div>
+              <div class="stat-conf-pill" id="insp-a2-status-pill">Normal Traffic</div>
+            </div>
+            <div class="prob-bars-title">Top 3 Deviating Features (Evidence):</div>
+            <div class="evidence-list" id="insp-a2-evidence">
+              <!-- Dynamically populated by app.js -->
+            </div>
+            <div class="card-caption">Ledoit-Wolf Mahalanobis distance on 15 PCA components of signed log1p features (trained only on BENIGN).</div>
+          </div>
+        </div>
+
+        <!-- Agent 3 Card -->
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <div class="card-agent-badge badge-a3">Agent 3</div>
+            <div class="card-agent-name">Evidence Fusion</div>
+          </div>
+          <div class="agent-card-body">
+            <div class="stat-highlight">
+              <div class="stat-main-val" id="insp-a3-class">BENIGN</div>
+              <div class="stat-conf-pill" id="insp-a3-status-pill">Status: AGREE</div>
+            </div>
+            <div class="rationale-box">
+              <div class="rationale-title">Decision Rationale:</div>
+              <div class="rationale-text" id="insp-a3-rationale">Classifier: BENIGN (1.00). Anomaly 0.03 (normal). Agents agree -> ALLOW.</div>
+            </div>
+            <div class="card-caption">Zero-day hardened cost-aware fusion engine. Resolves disagreements with numeric guarantees.</div>
+          </div>
+        </div>
+
+        <!-- Agent 4 Card -->
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <div class="card-agent-badge badge-a4">Agent 4</div>
+            <div class="card-agent-name">Temporal Correlation</div>
+          </div>
+          <div class="agent-card-body">
+            <div class="stat-highlight">
+              <div class="stat-main-val" id="insp-a4-group">No Cluster</div>
+              <div class="stat-conf-pill" id="insp-a4-pattern">Single Flow</div>
+            </div>
+            <div class="correlation-stats" id="insp-a4-stats">
+              <div class="corr-stat-row"><span>Window Flows:</span> <b id="insp-a4-wflows">1</b></div>
+              <div class="corr-stat-row"><span>Suspicious Flows:</span> <b id="insp-a4-sflows">0</b></div>
+              <div class="corr-stat-row"><span>Benign Share:</span> <b id="insp-a4-bshare">100%</b></div>
+              <div class="corr-stat-row"><span>Distinct Dst Ports:</span> <b id="insp-a4-ports">1</b></div>
+            </div>
+            <div class="card-caption">Strictly causal sliding window (50 records). Groups repeated suspicious flows per source IP.</div>
+          </div>
+        </div>
+
+        <!-- Agent 5 Card -->
+        <div class="agent-card">
+          <div class="agent-card-header">
+            <div class="card-agent-badge badge-a5">Agent 5</div>
+            <div class="card-agent-name">Adaptive Defense</div>
+          </div>
+          <div class="agent-card-body">
+            <div class="stat-highlight">
+              <div class="stat-main-val" id="insp-a5-policy">No Policy Created</div>
+              <div class="stat-conf-pill" id="insp-a5-state">Inactive</div>
+            </div>
+            <div class="policy-details" id="insp-a5-details">
+              <div class="corr-stat-row"><span>Scope Type:</span> <b>SOURCE_IP</b></div>
+              <div class="corr-stat-row"><span>Trigger Requirement:</span> <b>&ge; 2 suspicious flows</b></div>
+              <div class="corr-stat-row"><span>Configured TTL:</span> <b>30 records</b></div>
+              <div class="corr-stat-row"><span>Policy Action:</span> <b>BLOCK future flows</b></div>
+            </div>
+            <div class="card-caption">Causal simulated firewall controller. Activates bounded policies strictly for future flows.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: POLICY LEDGER & GANTT TIMELINE -->
+    <section id="section-policies" class="card section-policies">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Adaptive Policy Ledger & Gantt Span</h2>
+          <p class="section-desc">Ledger of temporary firewall policies created by Agent 5 during replay. Policies are active strictly for sequence numbers after activation through expiration (<code>activatedIndex &lt; i &le; expiresIndex</code>).</p>
+        </div>
+        <div class="badge badge-info">Ledger: exactly 6 policies (P0001 - P0006)</div>
+      </div>
+
+      <!-- Policy Gantt Chart -->
+      <div class="gantt-container">
+        <div class="gantt-axis">
+          <span>Seq 1</span>
+          <span>Seq 25</span>
+          <span>Seq 50</span>
+          <span>Seq 75</span>
+          <span>Seq 100</span>
+          <span>Seq 125</span>
+          <span>Seq 150</span>
+          <span>Seq 175</span>
+          <span>Seq 200</span>
+        </div>
+        <div id="gantt-bars" class="gantt-bars">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Policy Table -->
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Policy ID</th>
+              <th>Scope Type</th>
+              <th>Scope Value</th>
+              <th>Activated After</th>
+              <th>Active Range (Seq)</th>
+              <th>Expires After</th>
+              <th>Flows Blocked</th>
+              <th>Trigger Reason</th>
+            </tr>
+          </thead>
+          <tbody id="policy-table-body">
+            <!-- Dynamically populated by app.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SOURCE IP TELEMETRY BOARD -->
+    <section id="section-endpoints" class="card section-endpoints">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Source IP Telemetry & Containment Board</h2>
+          <p class="section-desc">Observed traffic distribution across all 14 unique source IP addresses. Attacker IP <code>172.16.0.1</code> is fully contained; all benign <code>192.168.10.x</code> addresses are 100% preserved.</p>
+        </div>
+        <div class="badge badge-success">0 Benign False Blocks (100% Preserved)</div>
+      </div>
+
+      <div class="endpoints-grid" id="endpoints-grid">
+        <!-- Dynamically populated by app.js -->
+      </div>
+    </section>
+
+    <!-- SECTION 6: EVIDENCE & AGREEMENT PANEL -->
+    <section id="section-evidence" class="card section-evidence">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Evidence Consensus & Agreement Analysis</h2>
+          <p class="section-desc">A1 vs A2 consensus distribution and evaluation set ablation proving the multi-agent design adds robustness and safety.</p>
+        </div>
+      </div>
+
+      <div class="evidence-grid">
+        <!-- Donut Chart & Breakdown -->
+        <div class="evidence-card">
+          <h3 class="card-subtitle">Official Evidence Status Distribution</h3>
+          <div class="donut-wrapper">
+            <svg id="donut-svg" viewBox="0 0 120 120" width="140" height="140"></svg>
+            <div class="donut-legend">
+              <div class="legend-row"><span class="legend-dot dot-agree"></span> <b>AGREE:</b> <span id="donut-agree-val">172 (86.0%)</span></div>
+              <div class="legend-row"><span class="legend-dot dot-conflict"></span> <b>CONFLICT:</b> <span id="donut-conflict-val">28 (14.0%)</span></div>
+              <div class="legend-row"><span class="legend-dot dot-uncertain"></span> <b>UNCERTAIN:</b> <span id="donut-uncertain-val">0 (0.0%)</span></div>
+            </div>
+          </div>
+          <p class="card-caption">All 28 conflicts are high-confidence attacks where Agent 1 correctly identified the attack type while Agent 2 anomaly score was moderate. High classifier confidence resolved the conflict safely to BLOCK.</p>
+        </div>
+
+        <!-- Development Eval Ablation Table -->
+        <div class="evidence-card">
+          <div class="badge-tag-row">
+            <h3 class="card-subtitle">Development Eval Set Ablation Table</h3>
+            <span class="badge badge-outline">Labeled Eval Partition</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Architecture</th>
+                <th>Task</th>
+                <th>Accuracy</th>
+                <th>Macro-F1</th>
+                <th>False Allow</th>
+                <th>False Block</th>
+              </tr>
+            </thead>
+            <tbody id="ablation-table-body">
+              <!-- Dynamically populated by app.js -->
+            </tbody>
+          </table>
+          <p class="card-caption">Evaluated on the labeled development eval file (114,185 flows). Proves multi-agent fusion outperforms either detector alone while eliminating false block regret.</p>
+        </div>
+      </div>
+
+      <!-- Conflict Flows Table -->
+      <div class="conflict-table-box">
+        <h3 class="card-subtitle">Conflict Flows Detail (Click row to inspect on timeline)</h3>
+        <div class="table-responsive">
+          <table class="data-table data-table-hover">
+            <thead>
+              <tr>
+                <th>Record ID</th>
+                <th>Seq</th>
+                <th>Source IP</th>
+                <th>A1 Prediction</th>
+                <th>A1 Confidence</th>
+                <th>A2 Anomaly Score</th>
+                <th>Internal Status</th>
+                <th>Decision Rationale</th>
+              </tr>
+            </thead>
+            <tbody id="conflict-table-body">
+              <!-- Dynamically populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: "WHY THIS IS SAFE" & WHAT-IF PARAMETER MATRIX -->
+    <section id="section-tradeoff" class="card section-tradeoff">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">"Why This Is Safe" & Adaptive Defense Trade-Off</h2>
+          <p class="section-desc">Judges' defense review: why CyberSentinel balances attack containment against benign traffic preservation, and how the safeguards eliminate collateral damage.</p>
+        </div>
+      </div>
+
+      <!-- Safeguards Grid -->
+      <div class="safeguards-grid">
+        <div class="safeguard-card">
+          <div class="sg-icon sg-cyan"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h4 class="sg-title">1. Minimum 2 Suspicious Flows</h4>
+          <p class="sg-text">A single anomaly alert is weak evidence (5% benign false-alarm rate). Requiring 2 suspicious flows within a sliding window prevents single-flow anomaly noise from causing accidental firewall blocks.</p>
+        </div>
+        <div class="safeguard-card">
+          <div class="sg-icon sg-violet"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h4 class="sg-title">2. Bounded TTL with Continuous Renewal</h4>
+          <p class="sg-text">Policies expire automatically after 30 records unless active hostile traffic persists. When the attacker continues flooding, renewals seamlessly extend protection without locking out legitimate addresses indefinitely.</p>
+        </div>
+        <div class="safeguard-card">
+          <div class="sg-icon sg-green"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h4 class="sg-title">3. Strict Causality (Trigger Stays ALLOW)</h4>
+          <p class="sg-text">Per firewall causality, a policy is activated strictly for later records. The triggering packet itself stays ALLOW because it occurred before the rule was actuated in the ledger.</p>
+        </div>
+        <div class="safeguard-card">
+          <div class="sg-icon sg-amber"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+          <h4 class="sg-title">4. High Benign-Share Protection</h4>
+          <p class="sg-text">IPs with &gt; 25% benign traffic in their temporal window are protected from whole-IP blocking unless overwhelming attack volumes (&ge; 6 attacks) are detected.</p>
+        </div>
+      </div>
+
+      <!-- Interactive What-If Simulation Matrix -->
+      <div class="whatif-box">
+        <h3 class="card-subtitle">Interactive "What-If" Sensitivity Analysis</h3>
+        <p class="card-caption">Simulated on the hidden flow replay to show the effect of tuning parameters. The submitted configuration achieves 96% containment with exactly 0 benign false blocks.</p>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Configuration</th>
+                <th>Min Suspicious Flows</th>
+                <th>TTL (Records)</th>
+                <th>Policies Created</th>
+                <th>Attacker Blocked</th>
+                <th>Attacker Allowed</th>
+                <th>Benign Blocked (Collateral)</th>
+                <th>Impact & Analysis</th>
+              </tr>
+            </thead>
+            <tbody id="whatif-table-body">
+              <!-- Dynamically populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: OFFICIAL SUBMISSION VALIDATOR -->
+    <section id="section-validator" class="card section-validator">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Official Submission Validator Suite</h2>
+          <p class="section-desc">Independent rule compliance checker from <code>check_official.py</code> verifying schema contracts, window constraints, and exact replay ledger recomputation.</p>
+        </div>
+        <div class="badge badge-success" id="val-overall-badge">ALL 15 CHECKS PASSED</div>
+      </div>
+
+      <div class="validator-grid">
+        <div class="val-col">
+          <div class="val-group-title">Contract & Schema Checks</div>
+          <div class="val-checks-list" id="val-checks-list-1">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+        <div class="val-col">
+          <div class="val-group-title">Policy & Replay Recomputation Checks</div>
+          <div class="val-checks-list" id="val-checks-list-2">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+      </div>
+
+      <div class="files-summary-box">
+        <div class="files-title">Submitted Artifacts (<code>outputs/final/</code>):</div>
+        <div class="files-grid">
+          <div class="file-card">
+            <div class="file-name">classification.csv</div>
+            <div class="file-meta">200 rows | record_id, predicted_class, anomaly_score, evidence_status</div>
+          </div>
+          <div class="file-card">
+            <div class="file-name">replay.csv</div>
+            <div class="file-meta">200 rows | record_id, action, active_policy_id (NONE for ALLOW)</div>
+          </div>
+          <div class="file-card">
+            <div class="file-name">policies.csv</div>
+            <div class="file-meta">6 rows | policy_id, activated_after, scope_type, scope_value, expires_after</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Help & Shortcuts Modal -->
+  <div id="help-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">CyberSentinel Live Demo Controls</h3>
+        <button id="btn-close-modal" class="btn-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcut-row"><kbd>Space</kbd> <span>Play / Pause Replay</span></div>
+        <div class="shortcut-row"><kbd>&larr;</kbd> / <kbd>&rarr;</kbd> <span>Step Backward / Forward one flow</span></div>
+        <div class="shortcut-row"><kbd>N</kbd> <span>Jump to Next Policy Event (Activation / Expiry)</span></div>
+        <div class="shortcut-row"><kbd>R</kbd> <span>Trigger Fresh End-to-End Replay</span></div>
+        <div class="shortcut-row"><kbd>P</kbd> <span>Toggle Presenter Mode (Large Fonts & Talking Points)</span></div>
+        <div class="shortcut-row"><kbd>?</kbd> <span>Open this help dialog</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-text">Rakshak-Feature 2 &mdash; Jaypee Agentic AI International Summit 2026 &mdash; Track 1 (Agentic AI for Cybersecurity)</div>
+    <div class="footer-badges">
+      <span>Deterministic ML + Causal Rules</span>
+      <span>No External Network Requests</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

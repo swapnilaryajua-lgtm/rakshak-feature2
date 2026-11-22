@@ -1,0 +1,226 @@
+{
+  "Baseline: IForest (raw features)": {
+    "detector_type": "iforest_raw",
+    "fit_time_seconds": 5.05,
+    "calib": {
+      "partition": "CALIB",
+      "binary_auroc": 0.8783303626500236,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.818067085320784,
+        "DOS": 0.9281957451736913,
+        "DDOS": 0.9202574605263317,
+        "PORT_SCAN": 0.7225661583231388
+      },
+      "threshold_5pct": 0.9500879999999999,
+      "threshold_10pct": 0.8992240000000001,
+      "rates_5pct_far": {
+        "BENIGN": 0.050011975004898866,
+        "BRUTE_FORCE": 0.0009033423667570009,
+        "DOS": 0.09635158411190563,
+        "DDOS": 0.014322916666666666,
+        "PORT_SCAN": 0.0
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.10000217727361797,
+        "BRUTE_FORCE": 0.006323396567299007,
+        "DOS": 0.9772430711415001,
+        "DDOS": 0.9009548611111111,
+        "PORT_SCAN": 0.0005677946854417443
+      }
+    },
+    "eval": {
+      "partition": "EVAL",
+      "binary_auroc": 0.8729063187300143,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.822578709670831,
+        "DOS": 0.9301746092426237,
+        "DDOS": 0.9228580183385833,
+        "PORT_SCAN": 0.7323445106933403
+      },
+      "threshold_5pct": 0.9500879999999999,
+      "threshold_10pct": 0.8992240000000001,
+      "rates_5pct_far": {
+        "BENIGN": 0.04756587390210163,
+        "BRUTE_FORCE": 0.000722543352601156,
+        "DOS": 0.09741666666666667,
+        "DDOS": 0.019791666666666666,
+        "PORT_SCAN": 0.0
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.09644839252679122,
+        "BRUTE_FORCE": 0.0036127167630057803,
+        "DOS": 0.9744166666666667,
+        "DDOS": 0.8961805555555555,
+        "PORT_SCAN": 0.0008333333333333334
+      }
+    }
+  },
+  "Variant 1: IForest (log1p + robust scale)": {
+    "detector_type": "iforest_log",
+    "fit_time_seconds": 6.96,
+    "calib": {
+      "partition": "CALIB",
+      "binary_auroc": 0.905141446597756,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.8827119223313986,
+        "DOS": 0.8792689619102021,
+        "DDOS": 0.884699938242541,
+        "PORT_SCAN": 0.9909927518150825
+      },
+      "threshold_5pct": 0.949646,
+      "threshold_10pct": 0.9009,
+      "rates_5pct_far": {
+        "BENIGN": 0.050011975004898866,
+        "BRUTE_FORCE": 0.0027100271002710027,
+        "DOS": 0.03904170363797693,
+        "DDOS": 0.020572916666666666,
+        "PORT_SCAN": 0.9992050874403816
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.10006749548215724,
+        "BRUTE_FORCE": 0.5374887082204155,
+        "DOS": 0.24594185500287072,
+        "DDOS": 0.21649305555555556,
+        "PORT_SCAN": 0.999659323188735
+      }
+    },
+    "eval": {
+      "partition": "EVAL",
+      "binary_auroc": 0.912156010457801,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.8858303951196189,
+        "DOS": 0.8821766296950606,
+        "DDOS": 0.8867992252212464,
+        "PORT_SCAN": 0.9900086144397594
+      },
+      "threshold_5pct": 0.949646,
+      "threshold_10pct": 0.9009,
+      "rates_5pct_far": {
+        "BENIGN": 0.05013249779170347,
+        "BRUTE_FORCE": 0.001445086705202312,
+        "DOS": 0.04083333333333333,
+        "DDOS": 0.02048611111111111,
+        "PORT_SCAN": 0.999375
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.09848169197180047,
+        "BRUTE_FORCE": 0.5700867052023122,
+        "DOS": 0.25458333333333333,
+        "DDOS": 0.21840277777777778,
+        "PORT_SCAN": 0.9999305555555555
+      }
+    }
+  },
+  "Variant 2: PCA Recon Error (15 comps)": {
+    "detector_type": "pca_recon",
+    "fit_time_seconds": 2.19,
+    "calib": {
+      "partition": "CALIB",
+      "binary_auroc": 0.8950987183968456,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.9761857403604554,
+        "DOS": 0.8427022856205671,
+        "DDOS": 0.9083021408647647,
+        "PORT_SCAN": 0.9816302304813984
+      },
+      "threshold_5pct": 0.94993,
+      "threshold_10pct": 0.9005080000000002,
+      "rates_5pct_far": {
+        "BENIGN": 0.05003374774107862,
+        "BRUTE_FORCE": 0.997289972899729,
+        "DOS": 0.08220679576178297,
+        "DDOS": 0.00859375,
+        "PORT_SCAN": 0.9985237338178514
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.10000217727361797,
+        "BRUTE_FORCE": 1.0,
+        "DOS": 0.15016441359152358,
+        "DDOS": 0.6498263888888889,
+        "PORT_SCAN": 0.9992050874403816
+      }
+    },
+    "eval": {
+      "partition": "EVAL",
+      "binary_auroc": 0.9029657404105522,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.9760746762120438,
+        "DOS": 0.8475759174847086,
+        "DDOS": 0.9097976115907328,
+        "PORT_SCAN": 0.9814236597214121
+      },
+      "threshold_5pct": 0.94993,
+      "threshold_10pct": 0.9005080000000002,
+      "rates_5pct_far": {
+        "BENIGN": 0.05054915751404143,
+        "BRUTE_FORCE": 0.9992774566473989,
+        "DOS": 0.08195833333333333,
+        "DDOS": 0.008402777777777778,
+        "PORT_SCAN": 0.9985416666666667
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.09771503808269862,
+        "BRUTE_FORCE": 1.0,
+        "DOS": 0.14975,
+        "DDOS": 0.6472916666666667,
+        "PORT_SCAN": 0.9995833333333334
+      }
+    }
+  },
+  "Variant 3: Mahalanobis Distance (15 comps)": {
+    "detector_type": "mahalanobis",
+    "fit_time_seconds": 2.08,
+    "calib": {
+      "partition": "CALIB",
+      "binary_auroc": 0.9661126287529724,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.9459897481685088,
+        "DOS": 0.9550663926911946,
+        "DDOS": 0.9834790698611504,
+        "PORT_SCAN": 0.9699565378999622
+      },
+      "threshold_5pct": 0.950552,
+      "threshold_10pct": 0.9008120000000001,
+      "rates_5pct_far": {
+        "BENIGN": 0.050011975004898866,
+        "BRUTE_FORCE": 0.24932249322493225,
+        "DOS": 0.7563025210084033,
+        "DDOS": 0.9996527777777777,
+        "PORT_SCAN": 0.985350897115603
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.10000217727361797,
+        "BRUTE_FORCE": 0.991869918699187,
+        "DOS": 0.925726812464116,
+        "DDOS": 0.9996527777777777,
+        "PORT_SCAN": 0.9994322053145582
+      }
+    },
+    "eval": {
+      "partition": "EVAL",
+      "binary_auroc": 0.9644072563109725,
+      "per_class_auroc": {
+        "BRUTE_FORCE": 0.9457520240751286,
+        "DOS": 0.953265791750693,
+        "DDOS": 0.9810474512924785,
+        "PORT_SCAN": 0.9681291440281551
+      },
+      "threshold_5pct": 0.950552,
+      "threshold_10pct": 0.9008120000000001,
+      "rates_5pct_far": {
+        "BENIGN": 0.050615823069615505,
+        "BRUTE_FORCE": 0.2666184971098266,
+        "DOS": 0.752875,
+        "DDOS": 0.9998611111111111,
+        "PORT_SCAN": 0.9885416666666667
+      },
+      "rates_10pct_far": {
+        "BENIGN": 0.09933167780536992,
+        "BRUTE_FORCE": 0.9927745664739884,
+        "DOS": 0.9224583333333334,
+        "DDOS": 0.9998611111111111,
+        "PORT_SCAN": 0.9995138888888889
+      }
+    }
+  }
+}

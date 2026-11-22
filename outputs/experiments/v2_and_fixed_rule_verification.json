@@ -1,0 +1,48 @@
+{
+  "standard_eval": {
+    "accuracy": 0.9999562114113062,
+    "macro_f1": 0.9997607791076056,
+    "per_class_f1": {
+      "BENIGN": 0.9999583357637472,
+      "BRUTE_FORCE": 0.9989150090415914,
+      "DOS": 1.0,
+      "DDOS": 1.0,
+      "PORT_SCAN": 0.9999305507326898
+    },
+    "benign_total": 60001,
+    "benign_suspicious": 3037,
+    "benign_suspicious_pct": 5.06,
+    "actions": {
+      "ALLOW": 56968,
+      "BLOCK": 54179,
+      "ESCALATE": 3038
+    },
+    "statuses": {
+      "CONFIRMED": 104038,
+      "CONFLICT_RESOLVED": 7109,
+      "UNKNOWN_THREAT": 3038
+    }
+  },
+  "zero_day_fixed": {
+    "PORT_SCAN": {
+      "held_out_class": "PORT_SCAN",
+      "n_flows": 14400,
+      "agent1_miss_rate": 0.9994444444444445,
+      "agent2_catch_rate": 0.9885416666666667,
+      "fusion_safe_catch_rate": 0.9885416666666667,
+      "fusion_unknown_threat_rate": 0.9879861111111111,
+      "fusion_escalate_rate": 0.9879861111111111,
+      "fusion_suspicious_rate": 0.9885416666666667
+    },
+    "DDOS": {
+      "held_out_class": "DDOS",
+      "n_flows": 14400,
+      "agent1_miss_rate": 0.48715277777777777,
+      "agent2_catch_rate": 0.9998611111111111,
+      "fusion_safe_catch_rate": 0.9998611111111111,
+      "fusion_unknown_threat_rate": 0.4870138888888889,
+      "fusion_escalate_rate": 0.5219444444444444,
+      "fusion_suspicious_rate": 0.9998611111111111
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "Baseline (All 75 features)": {
+    "experiment_name": "Baseline (All 75 features)",
+    "n_features": 75,
+    "train_time_seconds": 72.06,
+    "calib": {
+      "accuracy": 0.9999422105615977,
+      "macro_f1": 0.9997741713294026,
+      "per_class_f1": {
+        "BENIGN": 0.9999564545276405,
+        "BRUTE_FORCE": 0.9990974729241877,
+        "DOS": 0.9999739019234283,
+        "DDOS": 0.9999565991059416,
+        "PORT_SCAN": 0.9998864281658149
+      }
+    },
+    "eval": {
+      "accuracy": 0.9999737268467838,
+      "macro_f1": 0.9999088820302925,
+      "per_class_f1": {
+        "BENIGN": 0.9999750006249843,
+        "BRUTE_FORCE": 0.9996388587937883,
+        "DOS": 1.0,
+        "DDOS": 1.0,
+        "PORT_SCAN": 0.9999305507326898
+      }
+    }
+  },
+  "Without Destination Port": {
+    "experiment_name": "Without Destination Port",
+    "n_features": 74,
+    "train_time_seconds": 74.29,
+    "calib": {
+      "accuracy": 0.9999306526739173,
+      "macro_f1": 0.9997664486571953,
+      "per_class_f1": {
+        "BENIGN": 0.9999455699371878,
+        "BRUTE_FORCE": 0.9990958408679927,
+        "DOS": 0.9999478052090401,
+        "DDOS": 0.9999565991059416,
+        "PORT_SCAN": 0.9998864281658149
+      }
+    },
+    "eval": {
+      "accuracy": 0.9999562114113062,
+      "macro_f1": 0.9997607791076056,
+      "per_class_f1": {
+        "BENIGN": 0.9999583357637472,
+        "BRUTE_FORCE": 0.9989150090415914,
+        "DOS": 1.0,
+        "DDOS": 1.0,
+        "PORT_SCAN": 0.9999305507326898
+      }
+    }
+  },
+  "Without TCP Window Bytes (fwd & bwd)": {
+    "experiment_name": "Without TCP Window Bytes (fwd & bwd)",
+    "n_features": 73,
+    "train_time_seconds": 73.15,
+    "calib": {
+      "accuracy": 0.9999422105615977,
+      "macro_f1": 0.9997741713294026,
+      "per_class_f1": {
+        "BENIGN": 0.9999564545276405,
+        "BRUTE_FORCE": 0.9990974729241877,
+        "DOS": 0.9999739019234283,
+        "DDOS": 0.9999565991059416,
+        "PORT_SCAN": 0.9998864281658149
+      }
+    },
+    "eval": {
+      "accuracy": 0.9999737268467838,
+      "macro_f1": 0.9999116605349817,
+      "per_class_f1": {
+        "BENIGN": 0.9999750002083316,
+        "BRUTE_FORCE": 0.9996388587937883,
+        "DOS": 0.9999791671006854,
+        "DDOS": 1.0,
+        "PORT_SCAN": 0.9999652765721032
+      }
+    }
+  },
+  "Without Dest Port & TCP Window Bytes": {
+    "experiment_name": "Without Dest Port & TCP Window Bytes",
+    "n_features": 72,
+    "train_time_seconds": 56.57,
+    "calib": {
+      "accuracy": 0.9999306526739173,
+      "macro_f1": 0.9997664486571953,
+      "per_class_f1": {
+        "BENIGN": 0.9999455699371878,
+        "BRUTE_FORCE": 0.9990958408679927,
+        "DOS": 0.9999478052090401,
+        "DDOS": 0.9999565991059416,
+        "PORT_SCAN": 0.9998864281658149
+      }
+    },
+    "eval": {
+      "accuracy": 0.99992993825809,
+      "macro_f1": 0.9997432798471537,
+      "per_class_f1": {
+        "BENIGN": 0.9999333355554815,
+        "BRUTE_FORCE": 0.9989150090415914,
+        "DOS": 0.9999375039060059,
+        "DDOS": 1.0,
+        "PORT_SCAN": 0.9999305507326898
+      }
+    }
+  }
+}

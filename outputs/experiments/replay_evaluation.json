@@ -1,0 +1,83 @@
+[
+  {
+    "min_suspicious_flows": 2,
+    "ttl_records": 100,
+    "containment_rate": 73.31,
+    "collateral_rate": 2.95,
+    "pure_benign_blocked": 2,
+    "mixed_benign_blocked": 463,
+    "policies_created": 2965
+  },
+  {
+    "min_suspicious_flows": 2,
+    "ttl_records": 250,
+    "containment_rate": 85.16,
+    "collateral_rate": 4.54,
+    "pure_benign_blocked": 4,
+    "mixed_benign_blocked": 711,
+    "policies_created": 1436
+  },
+  {
+    "min_suspicious_flows": 2,
+    "ttl_records": 500,
+    "containment_rate": 91.52,
+    "collateral_rate": 5.77,
+    "pure_benign_blocked": 5,
+    "mixed_benign_blocked": 904,
+    "policies_created": 797
+  },
+  {
+    "min_suspicious_flows": 3,
+    "ttl_records": 100,
+    "containment_rate": 72.84,
+    "collateral_rate": 2.88,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 454,
+    "policies_created": 2927
+  },
+  {
+    "min_suspicious_flows": 3,
+    "ttl_records": 250,
+    "containment_rate": 84.67,
+    "collateral_rate": 4.37,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 689,
+    "policies_created": 1408
+  },
+  {
+    "min_suspicious_flows": 3,
+    "ttl_records": 500,
+    "containment_rate": 91.1,
+    "collateral_rate": 5.56,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 877,
+    "policies_created": 781
+  },
+  {
+    "min_suspicious_flows": 5,
+    "ttl_records": 100,
+    "containment_rate": 68.27,
+    "collateral_rate": 1.38,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 217,
+    "policies_created": 2594
+  },
+  {
+    "min_suspicious_flows": 5,
+    "ttl_records": 250,
+    "containment_rate": 79.82,
+    "collateral_rate": 2.26,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 356,
+    "policies_created": 1245
+  },
+  {
+    "min_suspicious_flows": 5,
+    "ttl_records": 500,
+    "containment_rate": 86.76,
+    "collateral_rate": 3.66,
+    "pure_benign_blocked": 0,
+    "mixed_benign_blocked": 577,
+    "policies_created": 708
+  }
+]

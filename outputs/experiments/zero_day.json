@@ -1,0 +1,71 @@
+{
+  "PORT_SCAN": {
+    "held_out_class": "PORT_SCAN",
+    "n_flows": 14400,
+    "agent1_miss_rate_benign": 0.9994444444444445,
+    "agent1_pred_distribution": {
+      "BENIGN": 14392,
+      "DDOS": 8
+    },
+    "agent2_anomaly_catch_rate": 0.9885416666666667,
+    "agent2_mean_anomaly_score": 0.9700665347222223,
+    "fusion_unknown_threat_rate": 0.0,
+    "fusion_escalation_rate": 0.0002777777777777778,
+    "fusion_safe_catch_rate": 0.0008333333333333334,
+    "fusion_action_distribution": {
+      "ALLOW": 14388,
+      "BLOCK": 8,
+      "ESCALATE": 4
+    },
+    "fusion_status_distribution": {
+      "CONFLICT_RESOLVED": 14223,
+      "CONFIRMED": 173,
+      "LOW_CONFIDENCE": 4
+    }
+  },
+  "DDOS": {
+    "held_out_class": "DDOS",
+    "n_flows": 14400,
+    "agent1_miss_rate_benign": 0.495,
+    "agent1_pred_distribution": {
+      "PORT_SCAN": 7265,
+      "BENIGN": 7128,
+      "DOS": 7
+    },
+    "agent2_anomaly_catch_rate": 0.9998611111111111,
+    "agent2_mean_anomaly_score": 0.9838198194444444,
+    "fusion_unknown_threat_rate": 0.0,
+    "fusion_escalation_rate": 0.23284722222222223,
+    "fusion_safe_catch_rate": 0.6740277777777778,
+    "fusion_action_distribution": {
+      "BLOCK": 6353,
+      "ALLOW": 4694,
+      "ESCALATE": 3353
+    },
+    "fusion_status_distribution": {
+      "CONFIRMED": 6355,
+      "CONFLICT_RESOLVED": 4692,
+      "LOW_CONFIDENCE": 3353
+    }
+  },
+  "BRUTE_FORCE": {
+    "held_out_class": "BRUTE_FORCE",
+    "n_flows": 1384,
+    "agent1_miss_rate_benign": 1.0,
+    "agent1_pred_distribution": {
+      "BENIGN": 1384
+    },
+    "agent2_anomaly_catch_rate": 0.2666184971098266,
+    "agent2_mean_anomaly_score": 0.9468664739884394,
+    "fusion_unknown_threat_rate": 0.0,
+    "fusion_escalation_rate": 0.0,
+    "fusion_safe_catch_rate": 0.0,
+    "fusion_action_distribution": {
+      "ALLOW": 1384
+    },
+    "fusion_status_distribution": {
+      "CONFIRMED": 1015,
+      "CONFLICT_RESOLVED": 369
+    }
+  }
+}

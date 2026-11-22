@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-10-30 17:12:25",
+  "total_flows": 114185,
+  "full_coverage": {
+    "accuracy": 0.9999737268467838,
+    "macro_f1": 0.9999088820302925,
+    "per_class_f1": {
+      "BENIGN": 0.9999750006249843,
+      "BRUTE_FORCE": 0.9996388587937883,
+      "DOS": 1.0,
+      "DDOS": 1.0,
+      "PORT_SCAN": 0.9999305507326898
+    },
+    "confusion_matrix": [
+      [
+        60000,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1384,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        24000,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        14400,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0,
+        14398
+      ]
+    ]
+  },
+  "selective": {
+    "accuracy": 0.9999736001478392,
+    "macro_f1": 0.9999088359450073,
+    "escalated_count": 548,
+    "escalation_rate": 0.004799229320838989
+  },
+  "ablation_table": [
+    {
+      "system": "Agent 1 only (Threat)",
+      "task": "5-Class Classifier",
+      "accuracy": 1.0,
+      "macro_f1": 0.9999,
+      "false_allow_count": 2,
+      "false_block_count": 1
+    },
+    {
+      "system": "Agent 2 only (Anomaly)",
+      "task": "Binary (Attack vs Benign)",
+      "accuracy": 0.5235,
+      "macro_f1": 0.3827,
+      "auroc": 0.8729,
+      "false_allow_count": 51560,
+      "false_block_count": 2854
+    },
+    {
+      "system": "CyberSentinel Fusion",
+      "task": "Multi-Agent Defense",
+      "accuracy": 1.0,
+      "macro_f1": 0.9999,
+      "false_allow_count": 2,
+      "false_block_count": 1
+    }
+  ],
+  "disagreement_analysis": {
+    "total_eval_flows": 114185,
+    "agreements": {
+      "count": 59772,
+      "percentage": 52.35
+    },
+    "disagreements": {
+      "count": 54413,
+      "percentage": 47.65
+    },
+    "breakdown": {
+      "classifier_attack_anomaly_normal": {
+        "total": 51559,
+        "agent1_right": 51558,
+        "agent2_right": 1,
+        "neither_right": 0,
+        "agent1_win_rate": 100.0
+      },
+      "classifier_benign_anomaly_alert": {
+        "total": 2854,
+        "agent1_right": 2854,
+        "agent2_right": 0,
+        "neither_right": 0,
+        "agent1_win_rate": 100.0
+      }
+    }
+  },
+  "action_distribution": {
+    "ALLOW": 59454,
+    "BLOCK": 54183,
+    "ESCALATE": 548
+  },
+  "evidence_status_distribution": {
+    "CONFIRMED": 59772,
+    "CONFLICT_RESOLVED": 53865,
+    "UNKNOWN_THREAT": 548
+  }
+}
